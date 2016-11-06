@@ -16,7 +16,8 @@ import (
 	"github.com/bradrydzewski/go.auth"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/sessions"
-	"github.com/jimmykuu/gt-go-sdk"
+	// "github.com/jimmykuu/gt-go-sdk"
+	"github.com/dchest/captcha"
 	"github.com/jimmykuu/webhelpers"
 	"github.com/jimmykuu/wtforms"
 	"github.com/pborman/uuid"
@@ -185,8 +186,6 @@ func signupHandler(handler *Handler) {
 		handler.Redirect("/")
 	}
 
-	geeTest := geetest.NewGeeTest(Config.GtCaptchaId, Config.GtPrivateKey)
-
 	var username string
 	var email string
 	session, _ := store.Get(handler.Request, "user")
@@ -201,18 +200,17 @@ func signupHandler(handler *Handler) {
 		wtforms.NewTextField("username", "用户名", username, wtforms.Required{}, wtforms.Regexp{Expr: `^[a-zA-Z0-9_]{3,16}$`, Message: "请使用a-z, A-Z, 0-9以及下划线, 长度3-16之间"}),
 		wtforms.NewPasswordField("password", "密码", wtforms.Required{}),
 		wtforms.NewTextField("email", "电子邮件", email, wtforms.Required{}, wtforms.Email{}),
-		wtforms.NewTextField("geetest_challenge", "challenge", ""),
-		wtforms.NewTextField("geetest_validate", "validate", ""),
-		wtforms.NewTextField("geetest_seccode", "seccode", ""),
+		wtforms.NewTextField("captchaId", "challenge", ""),
+		wtforms.NewTextField("captchaSolution", "validate", ""),
 	)
 
 	if handler.Request.Method == "POST" {
 		if form.Validate(handler.Request) {
 			// 检查验证码
-			if !geeTest.Validate(form.Value("geetest_challenge"), form.Value("geetest_validate"), form.Value("geetest_seccode")) {
+			if !captcha.VerifyString(form.Value("captchaId"), form.Value("captchaSolution")) {
 				handler.renderTemplate("account/signup.html", BASE, map[string]interface{}{
 					"form":       form,
-					"gtUrl":      geeTest.EmbedURL(),
+					"CaptchaId":  captcha.New(),
 					"captchaErr": true,
 				})
 				return
@@ -228,8 +226,8 @@ func signupHandler(handler *Handler) {
 				form.AddError("username", "该用户名已经被注册")
 
 				handler.renderTemplate("account/signup.html", BASE, map[string]interface{}{
-					"form":  form,
-					"gtUrl": geeTest.EmbedURL(),
+					"form":      form,
+					"CaptchaId": captcha.New(),
 				})
 				return
 			}
@@ -241,8 +239,8 @@ func signupHandler(handler *Handler) {
 				form.AddError("email", "电子邮件地址已经被注册")
 
 				handler.renderTemplate("account/signup.html", BASE, map[string]interface{}{
-					"form":  form,
-					"gtUrl": geeTest.EmbedURL(),
+					"form":      form,
+					"CaptchaId": captcha.New(),
 				})
 				return
 			}
@@ -294,8 +292,8 @@ func signupHandler(handler *Handler) {
 		}
 	}
 	handler.renderTemplate("account/signup.html", BASE, map[string]interface{}{
-		"form":  form,
-		"gtUrl": geeTest.EmbedURL(),
+		"form":      form,
+		"CaptchaId": captcha.New(),
 	})
 }
 
@@ -341,20 +339,17 @@ func signinHandler(handler *Handler) {
 		wtforms.NewHiddenField("next", next),
 		wtforms.NewTextField("username", "用户名", "", &wtforms.Required{}),
 		wtforms.NewPasswordField("password", "密码", &wtforms.Required{}),
-		wtforms.NewTextField("geetest_challenge", "challenge", ""),
-		wtforms.NewTextField("geetest_validate", "validate", ""),
-		wtforms.NewTextField("geetest_seccode", "seccode", ""),
+		wtforms.NewTextField("captchaId", "challenge", ""),
+		wtforms.NewTextField("captchaSolution", "validate", ""),
 	)
-
-	geeTest := geetest.NewGeeTest(Config.GtCaptchaId, Config.GtPrivateKey)
 
 	if handler.Request.Method == "POST" {
 		if form.Validate(handler.Request) {
 			// 检查验证码
-			if !geeTest.Validate(form.Value("geetest_challenge"), form.Value("geetest_validate"), form.Value("geetest_seccode")) {
+			if !captcha.VerifyString(form.Value("captchaId"), form.Value("captchaSolution")) {
 				handler.renderTemplate("account/signin.html", BASE, map[string]interface{}{
 					"form":       form,
-					"gtUrl":      geeTest.EmbedURL(),
+					"CaptchaId":  captcha.New(),
 					"captchaErr": true,
 				})
 				return
@@ -369,8 +364,8 @@ func signinHandler(handler *Handler) {
 				form.AddError("username", "该用户不存在")
 
 				handler.renderTemplate("account/signin.html", BASE, map[string]interface{}{
-					"form":  form,
-					"gtUrl": geeTest.EmbedURL(),
+					"form":      form,
+					"CaptchaId": captcha.New(),
 				})
 				return
 			}
@@ -379,8 +374,8 @@ func signinHandler(handler *Handler) {
 				form.AddError("username", "邮箱没有经过验证,如果没有收到邮件,请联系管理员")
 
 				handler.renderTemplate("account/signin.html", BASE, map[string]interface{}{
-					"form":  form,
-					"gtUrl": geeTest.EmbedURL(),
+					"form":      form,
+					"CaptchaId": captcha.New(),
 				})
 				return
 			}
@@ -389,8 +384,8 @@ func signinHandler(handler *Handler) {
 				form.AddError("password", "密码和用户名不匹配")
 
 				handler.renderTemplate("account/signin.html", BASE, map[string]interface{}{
-					"form":  form,
-					"gtUrl": geeTest.EmbedURL(),
+					"form":      form,
+					"CaptchaId": captcha.New(),
 				})
 				return
 			}
@@ -409,9 +404,10 @@ func signinHandler(handler *Handler) {
 		}
 	}
 
+	logger.Println("captcha:", captcha.New())
 	handler.renderTemplate("account/signin.html", BASE, map[string]interface{}{
-		"form":  form,
-		"gtUrl": geeTest.EmbedURL(),
+		"form":      form,
+		"CaptchaId": captcha.New(),
 	})
 }
 

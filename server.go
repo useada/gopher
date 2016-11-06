@@ -6,12 +6,12 @@ package gopher
 
 import (
 	"fmt"
+	"github.com/dchest/captcha"
+	"github.com/gorilla/mux"
+	"golang.org/x/net/websocket"
 	"log"
 	"net/http"
 	"os"
-
-	"github.com/gorilla/mux"
-	"golang.org/x/net/websocket"
 )
 
 var (
@@ -63,6 +63,7 @@ func handlerFun(route Route) http.HandlerFunc {
 
 func StartServer() {
 	//http.Handle("/static/", http.FileServer(http.Dir(".")))
+	http.Handle("/captcha/", captcha.Server(captcha.StdWidth, captcha.StdHeight))
 	http.Handle("/get/package", websocket.Handler(getPackageHandler))
 
 	r := mux.NewRouter()
@@ -73,7 +74,7 @@ func StartServer() {
 	r.PathPrefix("/static/").HandlerFunc(fileHandler)
 	http.Handle("/", r)
 
-	logger.Println("Server start on:", Config.Port)
+	logger.Println("Server start on------>", Config.Port)
 	// http server
 	// err := http.ListenAndServeTLS(fmt.Sprintf(":%d", Config.Port), "cert.pem", "key.pem", nil)
 	err := http.ListenAndServe(fmt.Sprintf(":%d", Config.Port), nil)

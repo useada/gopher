@@ -5,10 +5,9 @@ URL和Handler的Mapping
 package gopher
 
 import (
+	"gopkg.in/mgo.v2"
 	"net/http"
 	"time"
-
-	"gopkg.in/mgo.v2"
 )
 
 // NewHandler返回含有请求上下文的Handler.

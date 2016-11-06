@@ -2,12 +2,12 @@
 <html lang="zh-CN">
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-	<meta name="keywords" content="Golang, Go语言, Golang 中国, Golang社区, golang.tc" />
-	<meta name="description" content="Golang中国社区，致力于打造国内Gopher交流的地方，提供社区，文章，酷站，第三方包，下载功能">
+	<meta name="keywords" content="面试题，笔试题，C，C++，Java，Python，PHP，C#，Linux，Windows，lanmei.io" />
+	<meta name="description" content="蓝莓社区，致力于打造国内程序员笔试面试交流的地方，提供社区，文章，图书功能">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta property="wb:webmaster" content="7e9b420372e9d83e" />
 	<meta property="qc:admins" content="44113752776774167436375" />
-	<title>{{template "Title" .}} - Golang中国</title>
+	<title>{{template "Title" .}} - 蓝莓社区</title>
 	<script type="text/javascript" src="http://cdn.staticfile.org/jquery/2.0.3/jquery.min.js"></script>
 	<link rel="stylesheet" href="http://7xk58a.com1.z0.glb.clouddn.com/bootstrap-3.3.6/css/bootstrap.min.css">
 	<link rel="stylesheet" href="http://7xk58a.com1.z0.glb.clouddn.com/font-awesome-4.4.0/css/font-awesome.min.css">
@@ -17,14 +17,17 @@
 </head>
 <body>
 	<header>
+		<!-- <div class="container"> -->
+			<!-- <ul class="nav navbar-nav pull-right top"> -->
+				<!-- <li><a href="http://www.jiankongbao.com/labs/http" target="_blank">免费性能测试</a></li> -->
+        <!-- <li><a href="http://click.aliyun.com/m/3041/" target="_blank">高性能云服务器+SSD</a></li> -->
+			<!-- </ul> -->
+		<!-- </div> -->
 		<div class="container">
-			<ul class="nav navbar-nav pull-right top">
-				<li><a href="http://www.jiankongbao.com/labs/http" target="_blank">免费性能测试</a></li>
-        <li><a href="http://click.aliyun.com/m/3041/" target="_blank">高性能云服务器+SSD</a></li>
-			</ul>
-		</div>
-		<div class="container">
-				<a class="brand" href="/"><img src="http://77fkk5.com1.z0.glb.clouddn.com/logo/golangtc.png?imageView2/2/h/60/q/100" alt="Golang中国"></a>
+			<a class="brand" href="/">
+        <!-- <img src="http://77fkk5.com1.z0.glb.clouddn.com/logo/golangtc.png?imageView2/2/h/60/q/100" alt="蓝莓社区"> -->
+        <span class="h1">蓝莓社区<small>关注程序员笔试面试</small></span>
+      </a>
 				<div class="bar">
 					{{$ads := ads "top0" .db}}
 						{{range $ads}}
@@ -84,24 +87,24 @@
 				<ul class="nav navbar-nav" id="menu">
 					<li{{if eq .active "topic"}} class="active"{{end}}><a href="/">社区</a></li>
 					<li{{if eq .active "article"}} class="active"{{end}}><a href="/articles">文章</a></li>
-					<li{{if eq .active "site"}} class="active"{{end}}><a href="/sites">酷站</a></li>
-					<li{{if eq .active "package"}} class="active"{{end}}><a href="/packages">第三方包</a></li>
+					<!-- <li{{if eq .active "site"}} class="active"{{end}}><a href="/sites">酷站</a></li> -->
+					<!-- <li{{if eq .active "package"}} class="active"{{end}}><a href="/packages">第三方包</a></li> -->
 					<li{{if eq .active "members"}} class="active"{{end}}><a href="/members">会员</a></li>
           <li{{if eq .active "books"}} class="active"{{end}}><a href="/books">图书</a></li>
-					<li><a href="http://tour.golangtc.com" target="_blank" rel="nofollow">Go 指南</a></li>
-					<li><a href="http://godoc.golangtc.com" target="_blank" rel="nofollow">GoDoc</a></li>
-					<li><a href="http://goblog.golangtc.com" target="_blank" rel="nofollow">GoBlog</a></li>
-					<li class="dropdown">
-					  <a href="#" class="dropdown-toggle" data-toggle="dropdown">下载 <span class="caret"></span></a>
-					  <ul class="dropdown-menu" role="menu">
-						<li><a href="/download">Go</a></li>
-						<li><a href="/download/package">第三方包</a></li>
-						<li><a href="/download/liteide">LiteIDE</a></li>
-					  </ul>
-					</li>
-                    <li><a href="/timeline">时间线</a></li>
-				</ul>
-				<form action="/search" class="navbar-form pull-right" method="get" role="search">
+					<!-- <li><a href="http://tour.golangtc.com" target="_blank" rel="nofollow">Go 指南</a></li> -->
+					<!-- <li><a href="http://godoc.golangtc.com" target="_blank" rel="nofollow">GoDoc</a></li> -->
+					<!-- <li><a href="http://goblog.golangtc.com" target="_blank" rel="nofollow">GoBlog</a></li> -->
+					<!-- <li class="dropdown"> -->
+					  <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown">下载 <span class="caret"></span></a> -->
+					  <!-- <ul class="dropdown-menu" role="menu"> -->
+						<!-- <li><a href="/download">Go</a></li> -->
+						<!-- <li><a href="/download/package">第三方包</a></li> -->
+						<!-- <li><a href="/download/liteide">LiteIDE</a></li> -->
+					  <!-- </ul> -->
+					<!-- </li> -->
+          <!-- <li><a href="/timeline">时间线</a></li> -->
+        </ul>
+        <form action="/search" class="navbar-form pull-right" method="get" role="search">
 					<div class="form-group">
 						<input name="q" type="text" class="form-control" placeholder="搜索">
 					</div>
@@ -134,7 +137,7 @@
 					<li><a href="https://github.com/jimmykuu/gopher" target="_blank">GitHub</a></li>
 				</ul>
 			</p>
-			<p>&copy;2012-2016 golangtc.com</p>
+			<p>&copy;2016-2016 lanmei.io</p>
 			<p>Website built by <a href="https://github.com/jimmykuu/gopher" target="_blank" rel="nofollow">Gopher</a>, powered by <a href="http://golang.org/" target="_blank" rel="nofollow">Golang</a>, <a href="http://www.mongodb.org/" target="_blank" rel="nofollow">MongoDB</a>.</p>
 			<p>
 			  Build version {{.goVersion}}.
@@ -142,15 +145,12 @@
 			  Icons from <a target="_blank" href="http://glyphicons.com/" rel="nofollow">Glyphicons</a>.
 			  {{loadtimes .startTime}}.
 			</p>
-			<p>
-				服务器由 <a href="http://www.ucloud.cn/?utm_source=zanzhu&utm_campaign=golang&utm_medium=display&utm_content=yejiao&ytag=golang_logo" target="_blank"><strong>UCloud</strong></a> 赞助
-			</p>
-			<p class="friendly_links clearfix">
-			  <a class="pull-right" href="http://www.ucloud.cn/?utm_source=zanzhu&utm_campaign=golang&utm_medium=display&utm_content=yejiao&ytag=golang_logo" target="_blank" title="服务器由 UCloud 赞助"><img src="http://77fkk5.com2.z0.glb.clouddn.com/logo/UCloud_Logo_150x30.png" border="0" alt="UCloud云计算"></a>
-			  {{range .linksOnBottom}}
-			  <a href="{{.URL}}" target="_blank"><img src="{{.Logo}}" alt="{{.Name}}"></a>
-			  {{end}}
-			</p>
+			<!-- <p class="friendly_links clearfix"> -->
+			  <!-- <a class="pull-right" href="http://www.ucloud.cn/?utm_source=zanzhu&utm_campaign=golang&utm_medium=display&utm_content=yejiao&ytag=golang_logo" target="_blank" title="服务器由 UCloud 赞助"><img src="http://77fkk5.com2.z0.glb.clouddn.com/logo/UCloud_Logo_150x30.png" border="0" alt="UCloud云计算"></a> -->
+			  <!-- {{range .linksOnBottom}} -->
+			  <!-- <a href="{{.URL}}" target="_blank"><img src="{{.Logo}}" alt="{{.Name}}"></a> -->
+			  <!-- {{end}} -->
+			<!-- </p> -->
 		</div>
 	</footer>
 	{{.analyticsCode}}

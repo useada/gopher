@@ -16,6 +16,24 @@
 	<link rel="shortcut icon" href="http://77fkk5.com1.z0.glb.clouddn.com/static/favicon.ico">
 </head>
 <body>
+
+<script type="text/javascript">
+    //判断访问终端
+    var browser={ versions:function(){
+        var u = navigator.userAgent, app = navigator.appVersion;
+        return {
+            trident: u.indexOf('Trident') > -1, //IE内核
+            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+            android: u.indexOf('Android') > -1 || u.indexOf('Adr') > -1, //android终端
+            iPad: u.indexOf('iPad') > -1, //是否iPad
+            weixin: u.indexOf('MicroMessenger') > -1, //是否微信 （2015-01-22新增）
+            };
+        }(),
+        language:(navigator.browserLanguage || navigator.language).toLowerCase()
+    }
+</script>
+
 	<header>
 		<!-- <div class="container"> -->
 			<!-- <ul class="nav navbar-nav pull-right top"> -->

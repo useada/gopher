@@ -1,6 +1,7 @@
 body {
 	background-color: #f2f2f2;
 	padding-bottom: 40px;
+  font-family: "Helvetica Neue",Helvetica,"Microsoft Yahei","Hiragino Sans GB","WenQuanYi Micro Hei","微软雅黑","华文细黑",STHeiti,sans-serif;
 }
 
 .page-header h1 {
@@ -24,7 +25,7 @@ ul.top a:hover {
 }
 
 a {
-	color: #778087;
+	color: #000000;
 }
 
 a:hover {

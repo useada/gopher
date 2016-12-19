@@ -9,7 +9,7 @@ body {
 }
 
 body {
-  font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-family: "Helvetica Neue",Helvetica,"Microsoft Yahei","Hiragino Sans GB","WenQuanYi Micro Hei","微软雅黑","华文细黑",STHeiti,sans-serif;
   background: #FFFFFF;
   margin: 0px;
   padding: 0px;
@@ -19,7 +19,7 @@ body {
 }
 
 .ui.header {
-  font-family: 'Source Sans Pro', "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-family: "Helvetica Neue",Helvetica,"Microsoft Yahei","Hiragino Sans GB","WenQuanYi Micro Hei","微软雅黑","华文细黑",STHeiti,sans-serif;
 }
 
 /*******************************
